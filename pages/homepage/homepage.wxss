@@ -1,0 +1,39 @@
+page{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    /* background:#eee; */
+}
+
+.navigation-bar{
+    position:fixed;
+    z-index:-1;
+    width:100%;
+    background-color:#1aad19;
+}
+
+.display-boardf{
+    margin-top:200rpx;
+    margin-bottom:50rpx;
+    width:650rpx;
+    height:300rpx;
+    background-color:#fff;
+    /* border:1rpx solid rgb(209, 209, 209); */
+    border-radius:20rpx;
+    box-shadow:1rpx 1rpx 25rpx 3rpx #a8a8a8;
+}
+
+.display-board{
+    margin-bottom:50rpx;
+    width:650rpx;
+    height:300rpx;
+    background-color:#fff;
+    /* border:1rpx solid rgb(209, 209, 209); */
+    border-radius:20rpx;
+    box-shadow:1rpx 1rpx 25rpx 3rpx #a8a8a8;
+}
+
+view{
+    background-color:#eee;
+    width:100%;
+}

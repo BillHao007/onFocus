@@ -1,0 +1,184 @@
+<view class="navigation-bar {{'color-' + themeColor}}"
+      style="{{'padding-top:' + statusBarHeight + 'px'}}">
+      <text class="headline">onFocus</text>
+</view>
+<view class="logo-box"
+      style="{{'padding-top:'+statusBarHeight+'px'}}">
+      <image class="icon-calendar" 
+             src="/images/plan_page/icon-calendar.png"
+             bindtap="openCalendar">
+      </image>
+      <image class="icon-sort"
+             src="/images/plan_page/icon-sort.png"
+             bindtap=""></image>
+</view>
+<view class="global-page {{bgChangeForGlobal}}"
+      style="{{'padding-top:'+statusBarHeight+'px;'+'min-height:'+ (windowHeight- statusBarHeight)+'px'}}">
+    <view class="information-box-bg"></view>
+    <view class="information-box {{'color-' + themeColor}}">
+          <view class="data-box todayTask">
+              <text>今日任务</text>
+              <view>
+                <text class="number">{{todayTask}}</text>
+                <text class="char">个</text>
+              </view>
+          </view>
+          <view class="data-box finish">
+              <text>已完成</text>
+              <view>
+                <text class="number">{{finish}}</text>
+                <text class="char">个</text>
+              </view>
+          </view>
+          <view class="data-box focusTime">
+              <text>今日focus</text>
+              <view>
+                  <text class="number">{{focusTime}}</text>
+                  <text class="char">min</text>
+              </view>
+          </view>
+    </view>
+
+    <!-- 以下是任务展板 -->
+    <block wx:if="{{isDisplayTaskList}}" wx:for="{{planList}}">
+      <!-- 第一个后面的展板 -->
+      <view wx:if="{{index}}"   
+              class="display-board"
+              id="{{index}}"
+              bindtap="toDetail"
+              bindlongpress="toDelete">
+              <view class="level-sign level-color-{{planList[index].levelColor}}"></view>
+              
+              <!-- 应该展示何种右上角图标 -->
+              <view wx:if="{{!planList[index].single}}"
+                    class="classify-sign classify-sign-muilty">多</view>
+              <view wx:if="{{planList[index].partner}}"
+                    class="classify-sign classify-sign-partner">合</view>
+              <view wx:if="{{planList[index].partner && !planList[index].single}}"
+                    class="classify-sign classify-sign-hold">M</view>
+              
+              <!-- 展板第一行:任务名称 -->
+              <text class="heading">{{planList[index].heading}}</text>
+              
+              <!-- 展板第二行:如果没完成,显示预计时长,如果完成,显示专注时长-->
+              <text wx:if="{{!planList[index].haveDone}}"
+                    class="tip guess-time">预计专注时长：{{planList[index].focTime}}min</text>
+              <text wx:else class="tip guess-time">专注时长：{{planList[index].costTime}}min</text>
+              
+              <!-- 展板第三行：单日任务显示开始将时间，多日任务显示第几天,后面显示的是提醒时间-->
+              <text wx:if="{{planList[index].single}}" class="tip begin-time">预计开始时间：{{planList[index].begTime}}</text>
+              <text wx:else class="tip begin-time">第{{planList[index].taskInDayX}}天 {{planList[index].endDate}}结束</text>
+              <text class="tip remind-off"
+                    wx:if="{{!planList[index].isRemind}}">未设置提醒</text>
+              <view class="tip remind-on" wx:else>
+                    <image class="clock"
+                           src="/images/plan_page/icon-clock.png"></image>
+                    <text class="remind-time">{{planList[index].remindTime}}</text>
+              </view>
+
+              <!-- 删除按钮 -->
+              <view class="delete-button"
+                    style="{{deleteButtonActiveStyle}}"
+                    catchtap="deleteTask"
+                    id="{{index}}">删除</view>
+
+              <text class="tip place">专注地点：{{planList[index].place}}</text>
+              <text class="tip status">状态：{{planList[index].status}}</text>
+              <icon size="44rpx"
+                    type="{{planList[index].iconType}}"
+                    id="icon-status">
+              </icon>
+        </view>
+
+        <!-- 第一个展板，分开展板的目的是设置不同的margin值-->
+        <view wx:else
+              class="display-boardf"
+              id="{{index}}"
+              bindtap="toDetail"
+              bindlongpress="toDelete">
+              <view class="level-sign level-color-{{planList[index].levelColor}}"></view>
+              <view wx:if="{{!planList[index].single}}"
+                    class="classify-sign classify-sign-muilty">多</view>
+              <view wx:if="{{planList[index].partner}}"
+                    class="classify-sign classify-sign-partner">合</view>
+              <view wx:if="{{planList[index].partner && !planList[index].single}}"
+                    class="classify-sign classify-sign-hold">M</view>
+              
+              <!-- 第一行：任务标题 -->
+              <text class="heading">{{planList[index].heading}}</text>
+              
+              <!-- 第二行：专注时长 -->
+              <text wx:if="{{!planList[index].haveDone}}"
+                    class="tip guess-time">预计专注时长：{{planList[index].focTime}}min</text>
+              <text wx:else class="tip guess-time">专注时长：{{planList[index].costTime}}min</text>
+              
+              <!-- 第三行：开始时间 -->
+              <text wx:if="{{planList[index].single}}" class="tip begin-time">预计开始时间：{{planList[index].begTime}}</text>
+              <text wx:else class="tip begin-time">第 {{planList[index].taskInDayX}} 天 {{planList[index].endDate}}结束</text>
+              <text class="tip remind-off"
+                    wx:if="{{!planList[index].isRemind}}">未设置提醒</text>
+              <view class="tip remind-on" wx:else>
+                    <image class="clock"
+                           src="/images/plan_page/icon-clock.png"></image>
+                    <text class="remind-time">{{planList[index].remindTime}}</text>
+              </view>
+              
+              <!-- 删除按钮 -->
+              <view class="delete-button"
+                    style="{{deleteButtonActiveStyle}}"
+                    catchtap="deleteTask"
+                    id="{{index}}">删除</view>
+              
+              <text class="tip place">专注地点：{{planList[index].place}}</text>
+              <text class="tip status">状态：{{planList[index].status}}</text>
+              <icon size="44rpx"
+                    type="{{planList[index].iconType}}"
+                    id="icon-status">
+              </icon>
+        </view>
+    </block>
+    <button wx:if="{{planList.length && !isTodayTaskFinished}}"
+            bindtap="confirm"
+            class="weui-btn weui-btn_block weui-btn_primary confirm-button">打卡</button>
+    <button wx:if="{{isTodayTaskFinished && isDisplayTaskList}}"
+            bindtap="backToData"
+            class="weui-btn weui-btn_block weui-btn_primary confirm-button">返回</button>
+    <view wx:if="{{globalEmpty && !isTodayTaskFinished}}" class="empty-demo">
+            <text>今日还没有制定任务哦~赶快专注起来吧!</text>
+            <image src="/images/plan_page/checklist.png"></image>
+    </view>
+
+    <!-- 打卡后显示的内容 -->
+    <view wx:if="{{!isDisplayTaskList}}"
+          class="finished-data"
+          style="{{'padding-top:' + statusBarHeight + 'px'}}">
+          <view class="congratulations">恭喜您今日打卡！</view>
+          <view class="wrapper-today-task">
+            <text class="today-task">今日任务数：{{planList.length}}</text>
+            <button class="weui-btn weui-btn_block weui-btn_primary search-button"
+                    bindtap="searchTaskList">查看</button>
+          </view>
+          <view class="wrapper-finish">
+            <text class="finished">今日完成数：{{finish}}</text>
+            <text class="finished-percent">完成度：{{finish / todayTask}}%</text>
+          </view>
+
+          <view class="wrapper-focus-time">
+            <text class="focus-time">今日专注时长：{{focusTime}}min</text>
+            <image src="/images/star/gold_star.png"></image>
+          </view>
+
+          <view class="wrapper-diary">
+              <form wx:if="{{!isSaveThisDiary}}" bindsubmit="saveDiary">
+                  <textarea placeholder="几句话记录今天"
+                            name="diary"></textarea>
+                  <button class="weui-btn weui-btn_block weui-btn_primary save-diary-button"
+                          form-type="submit">保存</button>
+              </form>
+              <view wx:else class="diary-content">{{diaryContent}}</view>
+          </view>
+    </view>
+</view>
+<view wx:if="{{!isTodayTaskFinished}}"
+      class="flow-ball {{'color-' + themeColor}}"
+          bindtap="newBoard">+</view>

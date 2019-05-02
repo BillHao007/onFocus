@@ -1,0 +1,5 @@
+<!-- <view class="navigation-bar {{'color-' + themeColor}}"
+      style="{{'padding-top:' + (statusBarHeight + 48) + 'px'}}">
+</view> -->
+
+<view style="{{'height:'+windowHeight+'px'}}"></view>

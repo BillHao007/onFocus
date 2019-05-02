@@ -1,0 +1,82 @@
+ 
+<view class="navigation-bar" style="{{'padding-top:' + statusBarHeight + 'px'}}">
+    <image class="setting"src='/images/personal/myicon/icon_setting.png' bindtap=''></image> 
+    <view class='userInfo'>
+        <view class="circleFrame" bindtap=''> 
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <image class='medal'
+        src='/images/personal/medal/{{medal}}/{{medal}}.png' style='top:{{statusBarHeight}}'> <!--勋章路径关键词-->
+        </image>
+        <view class='userName'>
+          <open-data type="userNickName"></open-data>
+        </view>
+        <view class='userData'>
+          <view class='checkingOutDays'>
+            <image class=''src='/images/personal/myicon/icon_calendar.png'></image>
+            <text> 连续打卡: {{day}}天</text>      <!--连续打卡-->
+          </view>
+          <view class='userGrade'>
+            <image src='/images/personal/myicon/icon_certificate_fil.png'></image>
+            <text wx:if="{{ medal == 'diamond' }}"> 本月段位: 钻石</text> <!--本月段位-->     
+            <text wx:if="{{ medal == 'gold' }}"> 本月段位: 黄金</text>
+            <text wx:if="{{ medal =='silver' }}"> 本月段位: 白银</text>
+            <text wx:if="{{ medal =='bronze' }}"> 本月段位: 青铜</text>
+          </view>
+      </view>
+    </view>
+  </view>
+<view class='global' style="top:{{statusBarHeight}}px">
+  <view id='datapackage' >
+    <view class='data'>
+      <view class="data1">
+        <text class='title'>总任务数</text>         <!--总任务数-->
+        <text>{{taskNum}}</text>                   
+      </view>
+      <view class="data2">
+        <text class='title'>完成总数</text>         <!--总完成数-->
+        <text>{{finishNum}}</text>                 
+        </view>
+      <view class="data3">
+       <text class='title'>专注时长</text>         
+        <text> {{focusTime}} </text> <view id='timeunit'>h</view>      <!--专注时长-->
+      </view>
+    </view> 
+  </view>
+    <view id="swiperpackage">
+      <swiper class="swiper" 
+      circular='{{circular}}' 
+      previous-margin='{{previous}}'rpx
+      next-margin='{{next}}'rpx
+      autoplay='{{auto}}'
+      interval='{{interval}}'
+      >
+      <swiper-item class = 'plan'>
+        </swiper-item>
+        <swiper-item class = 'note'> 
+          <view class="list">
+            <view class="topbar">备忘录</view> 
+            <view class="thing">
+              <text class="note note1">{{note1}}哈哈哈哈哈哈哈哈哈哈哈</text>
+              <text class="time">12:30</text>
+              <image class="clock" src="/images/personal/myicon/icon_clock.png"></image>
+            </view>  <!--备忘事项-->
+            <view class="thing">
+              <text class="note note1">{{note2}}</text>
+              <text class="time">12:30</text>
+              <image class="clock" src="/images/personal/myicon/icon_clock.png"></image>
+            </view>
+            <view class="thing thing-bottom">
+              <text class="note note1">{{note3}}</text>
+              <text class="time">12:30</text>
+              <image class="clock" src="/images/personal/myicon/icon_clock.png"></image>
+            </view>
+          </view>
+        </swiper-item>
+        <swiper-item class = 'rank'></swiper-item>
+      </swiper>      
+    </view>
+    
+</view>
+
+

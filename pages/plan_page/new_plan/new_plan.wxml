@@ -1,0 +1,147 @@
+<view wx:if="{{isDetail == -1}}" class="tabBar">
+    <text id="0"
+          class="single"
+          bindtap="changePage"
+          style="{{tabBarStyleList[0]}}">单日任务</text>
+    <text id="1"
+          class="mulitple"
+          bindtap="changePage"
+          style="{{tabBarStyleList[1]}}">多日任务</text>
+    <text id="2"
+          class="note"
+          bindtap="changePage"
+          style="{{tabBarStyleList[2]}}">模板任务</text>
+</view>
+<form bindsubmit="submit">
+<view class="content">
+    <view class="task-name">
+        <text class="sign">任务名称</text>
+        <view class="wrapper-input">
+            <input placeholder="尽量不超过17个字哦！"
+                   name="taskName"
+                   value="{{taskName}}"></input>
+        </view>
+    </view>
+    <view class="set-time">
+        <text wx:if="{{pageId == 0}}" class="sign">开始时间</text>
+        <text wx:if="{{pageId == 1}}" class="sign">坚持日期</text>
+        <view wx:if="{{pageId == 0}}"class="wrapper-input">
+            <text wx:if="{{!isStartTimeOpen}}">未设置</text>
+            <picker wx:if="{{isStartTimeOpen}}"
+                    mode="time"
+                    value="{{startTime}}"
+                    start="00:00"
+                    end="23:59"
+                    name="startTime"
+                    bindchange="timePickerChange">
+                    <span>{{startTime}}</span>    
+            </picker>
+        </view>
+        <switch wx:if="{{pageId == 0}}"
+                colo="{{themeColor}}"
+                bindchange="controlStartTime"
+                name="startTimeSwitch"
+                checked="{{isStartTimeOpen}}"></switch>
+        <view wx:if="{{pageId == 1}}" class="wrapper-input">
+                <picker mode="date"
+                        value="{{startDate}}"
+                        start="{{startDate}}"
+                        end="{{nowYear}}-12-31"
+                        name="startDate"
+                        bindchange="datePickerChange"
+                        id="date-picker-st">
+                        <span>{{startDate}}</span>    
+                </picker>
+                <text id="to">到</text>
+                <picker mode="date"
+                        value="{{endDate}}"
+                        start="{{endDate}}"
+                        end="{{nowYear}}-12-31"
+                        name="endDate"
+                        bindchange="datePickerChange"
+                        id="date-picker-ed">
+                        <span>{{endDate}}</span>    
+                </picker>
+        </view>
+    </view>
+    <view class="focus-time">
+            <text wx:if="{{pageId == 0}}" class="sign">预计专注时长</text>
+            <text wx:if="{{pageId == 1}}" class="sign">每日专注时长</text>
+            <view class="wrapper-input">
+                <picker mode="time"
+                        start="00:00"
+                        end="23:59"
+                        value="00:00"
+                        name="focusTime"
+                        bindchange="focusPickerChange">
+                        <span>{{focusTime}}</span>    
+                </picker>
+            </view>
+    </view>
+    <view class="remind">
+            <text class="sign">提醒</text>
+            <view class="wrapper-input">
+                <text wx:if="{{!isRemindPickerDisplay}}">未开启提醒</text>
+                <picker wx:if="{{isRemindPickerDisplay}}"
+                        mode="time"
+                        value="{{remindTime}}"
+                        start="00:00"
+                        end="23:59"
+                        name="remindTime"
+                        bindchange="remindPickerChange">
+                        <span>{{remindTime}}</span>    
+                </picker>
+            </view>
+            <switch colo="{{themeColor}}"
+                    bindchange="controlRemindPicker"
+                    name="remindSwitch"
+                    checked="{{isRemindPickerDisplay}}"></switch>
+    </view>
+    <view class="place">
+        <text class="sign">专注地点</text>
+        <view class="wrapper-input">
+            <input name="place" placeholder="选填" value="{{focPlace}}"></input>
+        </view>
+    </view>
+    <view class="level">
+        <text class="sign">优先级</text>
+        <view class="wrapper-input">
+            <text wx:if="{{!isLevelPickerDisplay}}">未设置</text>
+            <picker wx:if="{{isLevelPickerDisplay}}"
+                mode="selector"
+                range="{{levelArray}}"
+                value="0"
+                name="level"
+                bindchange="levelPickerChange">
+                <span>{{levelType}}</span>    
+            </picker>
+        </view>
+        <switch colo="{{themeColor}}"
+                name="levelSwitch"
+                bindchange="controlLevelPicker"
+                checked="{{isLevelPickerDisplay}}"></switch>
+    </view>
+    <view class="task-content">
+        <text class="sign">任务内容</text>
+        <textarea class="text-area"
+                  placeholder="详细规划一下你的任务吧！（选填）"
+                  name="textareaContent"
+                  value="{{textContent}}"></textarea>
+    </view>
+</view>
+
+<view wx:if="{{isDetail != -1}}" class="wrapper-detail-button">
+    <button class="weui-btn weui-btn_block weui-btn_primary edit-button"
+            form-type="submit">修改
+    </button>
+    <button wx:if="{{isDetail != -1}}"
+            class="weui-btn weui-btn_block weui-btn_primary start-focus-button"
+            bindtap="startToWork">开始专注
+    </button>
+</view>
+<button wx:else
+        class="weui-btn weui-btn_block weui-btn_primary submit-button"
+        form-type="submit"
+        >建立</button>
+
+</form>

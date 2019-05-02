@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/personal/personal",
+    "pages/plan_page/focus_page/focus_page",
+    "pages/plan_page/plan_page",
+    "pages/homepage/homepage",
+    "pages/plan_page/new_plan/new_plan"
+    
+  ],
+  "window": {
+    "navigationBarBackgroundColor":"#1aad19"
+  },
+  "tabBar": {
+    "color": "#2b2c2c",
+    "selectedColor": "#1aad19",
+    "list": [
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "我的",
+        "iconPath": "images/tabBar/face.png",
+        "selectedIconPath": "images/tabBar/1aad19/faced.png"
+      },
+      {
+        "pagePath": "pages/plan_page/plan_page",
+        "text": "onFocus",
+        "iconPath": "images/tabBar/note.png",
+        "selectedIconPath": "images/tabBar/1aad19/noted.png"
+      },
+      {
+        "pagePath": "pages/homepage/homepage",
+        "text": "首页",
+        "iconPath": "images/tabBar/home.png",
+        "selectedIconPath": "images/tabBar/1aad19/homed.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
