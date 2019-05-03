@@ -77,7 +77,9 @@
               </view>
 
               <!-- 删除按钮 -->
-              <view class="delete-button"
+              <view wx:if="{{deleteButtonId == index && !isTodayTaskFinished}}"
+                    class="delete-button"
+                    hover-class="button-hover-1aad19"
                     style="{{deleteButtonActiveStyle}}"
                     catchtap="deleteTask"
                     id="{{index}}">删除</view>
@@ -124,7 +126,9 @@
               </view>
               
               <!-- 删除按钮 -->
-              <view class="delete-button"
+              <view wx:if="{{deleteButtonId == index && !isTodayTaskFinished}}"
+                    class="delete-button"
+                    hover-class="button-hover-1aad19"
                     style="{{deleteButtonActiveStyle}}"
                     catchtap="deleteTask"
                     id="{{index}}">删除</view>
@@ -139,10 +143,12 @@
     </block>
     <button wx:if="{{planList.length && !isTodayTaskFinished}}"
             bindtap="confirm"
-            class="weui-btn weui-btn_block weui-btn_primary confirm-button">打卡</button>
+            class="weui-btn weui-btn_block weui-btn_primary confirm-button"
+            hover-class="button-hover-1aad19">打卡</button>
     <button wx:if="{{isTodayTaskFinished && isDisplayTaskList}}"
             bindtap="backToData"
-            class="weui-btn weui-btn_block weui-btn_primary confirm-button">返回</button>
+            class="weui-btn weui-btn_block weui-btn_primary confirm-button"
+            hover-class="button-hover-1aad19">返回</button>
     <view wx:if="{{globalEmpty && !isTodayTaskFinished}}" class="empty-demo">
             <text>今日还没有制定任务哦~赶快专注起来吧!</text>
             <image src="/images/plan_page/checklist.png"></image>
@@ -156,6 +162,7 @@
           <view class="wrapper-today-task">
             <text class="today-task">今日任务数：{{planList.length}}</text>
             <button class="weui-btn weui-btn_block weui-btn_primary search-button"
+                    hover-class="button-hover-1aad19"  
                     bindtap="searchTaskList">查看</button>
           </view>
           <view class="wrapper-finish">
@@ -173,6 +180,7 @@
                   <textarea placeholder="几句话记录今天"
                             name="diary"></textarea>
                   <button class="weui-btn weui-btn_block weui-btn_primary save-diary-button"
+                          hover-class="button-hover-1aad19"
                           form-type="submit">保存</button>
               </form>
               <view wx:else class="diary-content">{{diaryContent}}</view>
@@ -181,4 +189,4 @@
 </view>
 <view wx:if="{{!isTodayTaskFinished}}"
       class="flow-ball {{'color-' + themeColor}}"
-          bindtap="newBoard">+</view>
+      bindtap="newBoard">+</view>

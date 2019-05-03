@@ -9,29 +9,39 @@ page{
     width:600rpx;
 }
 
+.button-hover-1aad19{
+    background-color:#158f15;
+}
 
 .wrapper-detail-button{
     margin:0 auto;
+    margin-top:40rpx;
     width:650rpx;
 }
 
-.wrapper-detail-button .edit-button{
+.wrapper-detail-button .edit-this-task{
     display: inline-block;
     margin:0;
-    margin-top:60rpx;
+    /* margin-top:40rpx; */
     background-color:#1aad19;
     color:#fff;
     width:300rpx;
 }
 
-.wrapper-detail-button .start-focus-button{
+.wrapper-detail-button .delete-this-task{
     display: inline-block;
     margin:0;
-    margin-top:60rpx;
-    background-color:#1aad19;
+    /* margin-top:60rpx; */
+    background-color:#fa5151;
     color:#fff;
     width:300rpx;
     margin-left:40rpx;
+}
+
+.wrapper-detail-button .do-this-task{
+    background-color:#1aad19;
+    color:#fff;
+    width:650rpx;
 }
 
 .tabBar{

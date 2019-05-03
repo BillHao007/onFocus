@@ -13,7 +13,8 @@ Page({
         tapId: -1,                 //用于存储被点击的表单的id值
         deleteButtonActiveStyle: "opacity:0;",
         isSaveThisDiary:false,
-        diaryContent:""   //***  保存用户打卡后的写内容*/
+        diaryContent:"",   //***  保存用户打卡后的写内容*/
+        deleteButtonId: 0  //记录删除按钮的id
     },
 
     onLoad: function(){
@@ -88,7 +89,6 @@ Page({
         this.setData({
             tapId: id   /*选择任务的id*/
         });
-        console.log(this.data.id)
         wx.navigateTo({
             url: "/pages/plan_page/new_plan/new_plan"
         })
@@ -98,6 +98,10 @@ Page({
         var x = event.detail.x;  //获取点击的位置
         var y = event.detail.y - 40;  //-40是为了让按钮在手指上方显示
         var style = this.data.deleteButtonActiveStyle;
+        var id = event.currentTarget.id;
+        this.setData({
+            deleteButtonId: id
+        })
         if(style[9] != ".")
         {
             this.setData({
@@ -117,11 +121,14 @@ Page({
     deleteTask: function(event){
         var id = event.currentTarget.id;
         var style = this.data.deleteButtonActiveStyle;
+        var plan = this.data.planList;
         if(this.data.planList.length != 1)
         {
+            plan.splice(id, 1);
             this.setData({
-                planList: this.data.planList.splice(id, 1),
-                deleteButtonActiveStyle:"opacity:0;" + style.substring(12, style.length)
+                planList: plan,
+                deleteButtonActiveStyle:"opacity:0;" + style.substring(12, style.length),
+                todayTask: this.data.planList.length
             })
         }
         else
@@ -129,7 +136,8 @@ Page({
                 planList: new Array(),
                 deleteButtonActiveStyle:"opacity:0;",
                 globalEmpty: true,  //让任务为空时提示符显示
-                bgChangeForGlobal: "global-page-gray"  //让任务为空时背景色为灰色
+                bgChangeForGlobal: "global-page-gray",  //让任务为空时背景色为灰色
+                todayTask: 0
             })
     },
 

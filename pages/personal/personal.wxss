@@ -42,6 +42,7 @@ image{
   width: 224rpx;
   height: 224rpx;
   background-color: white;
+  border:1rpx solid #fff;
   border-radius: 50%;
   overflow:hidden;
   margin-left:auto;  

@@ -1,4 +1,4 @@
- 
+﻿ 
 <view class="navigation-bar" style="{{'padding-top:' + statusBarHeight + 'px'}}">
     <image class="setting"src='/images/personal/myicon/icon_setting.png' bindtap=''></image> 
     <view class='userInfo'>
@@ -6,7 +6,7 @@
           <open-data type="userAvatarUrl"></open-data>
         </view>
         <image class='medal'
-        src='/images/personal/medal/{{medal}}/{{medal}}.png' style='top:{{statusBarHeight}}'> <!--勋章路径关键词-->
+        src='/images/personal/medal/{{medal}}/{{medal}}.png' style='top:{{statusBarHeight}}'> 勋章路径关键词
         </image>
         <view class='userName'>
           <open-data type="userNickName"></open-data>

@@ -412,3 +412,7 @@
     font-weight:lighter;
     font-size:80rpx;
 }
+
+.button-hover-1aad19{
+    background-color:#158f15;
+}

@@ -131,16 +131,21 @@
 </view>
 
 <view wx:if="{{isDetail != -1}}" class="wrapper-detail-button">
-    <button class="weui-btn weui-btn_block weui-btn_primary edit-button"
-            form-type="submit">修改
+    <button class="weui-btn weui-btn_block weui-btn_primary edit-this-task"
+            hover-class="button-hover-1aad19"
+            form-type="submit">修改任务
     </button>
-    <button wx:if="{{isDetail != -1}}"
-            class="weui-btn weui-btn_block weui-btn_primary start-focus-button"
-            bindtap="startToWork">开始专注
+    <button class="weui-btn weui-btn_block weui-btn_primary delete-this-task"
+            hover-class="button-hover-1aad19"
+            bindtap="deleteThisTask">删除任务
     </button>
+    <button class="weui-btn weui-btn_block weui-btn_primary do-this-task"
+            hover-class="button-hover-1aad19"
+            bindtap="doThisTask">开始专注</button>
 </view>
 <button wx:else
         class="weui-btn weui-btn_block weui-btn_primary submit-button"
+        hover-class="button-hover-1aad19"
         form-type="submit"
         >建立</button>
 
